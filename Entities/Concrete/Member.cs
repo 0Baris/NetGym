@@ -7,7 +7,6 @@ namespace Entities.Concrete
     {
         public int MemberId { get; set; }
         public int UserId { get; set; }
-        
         public string IdentityNumber { get; set; }
         public string Notes { get; set; }
         public char Gender { get; set; }

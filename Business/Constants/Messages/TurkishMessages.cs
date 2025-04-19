@@ -1,83 +1,85 @@
 ﻿namespace Business.Constants.Messages
 {
-    public class TurkishMessages : IMessage
+    public class TurkishMessages
     {
-        public string CampaignAdded { get; set; } = "Kampanya eklendi.";
-        public string CampaignUpdated { get; set; } = "Kampanya güncellendi.";
-        public string CampaignDeleted { get; set; } = "Kampanya silindi.";
+        public static string CampaignAdded = "Kampanya eklendi.";
+        public static string CampaignUpdated = "Kampanya güncellendi.";
+        public static string CampaignDeleted = "Kampanya silindi.";
         
-        public string DealerMemberAdded { get; set; } = "Bayi üyesi eklendi.";
-        public string DealerMemberUpdated { get; set; } = "Bayi üyesi güncellendi.";
-        public string DealerMemberDeleted { get; set; } = "Bayi üyesi silindi.";
+        public static string DealerMemberAdded = "Bayi üyesi eklendi.";
+        public static string DealerMemberUpdated = "Bayi üyesi güncellendi.";
+        public static string DealerMemberDeleted = "Bayi üyesi silindi.";
         
-        public string DealerAdded { get; set; } = "Bayi eklendi.";
-        public string DealerUpdated { get; set; } = "Bayi güncellendi.";
-        public string DealerDeleted { get; set; } = "Bayi silindi.";
+        public static string DealerAdded = "Bayi eklendi.";
+        public static string DealerUpdated = "Bayi güncellendi.";
+        public static string DealerDeleted = "Bayi silindi.";
         
-        public string EquipmentAdded { get; set; } = "Ekipman eklendi.";
-        public string EquipmentUpdated { get; set; } = "Ekipman güncellendi.";
-        public string EquipmentDeleted { get; set; } = "Ekipman silindi.";
+        public static string EquipmentAdded = "Ekipman eklendi.";
+        public static string EquipmentUpdated = "Ekipman güncellendi.";
+        public static string EquipmentDeleted = "Ekipman silindi.";
         
-        public string GymAccessLogAdded { get; set; } = "Spor salonu erişim kaydı eklendi.";
-        public string GymAccessLogUpdated { get; set; } = "Spor salonu erişim kaydı güncellendi.";
-        public string GymAccessLogDeleted { get; set; } = "Spor salonu erişim kaydı silindi.";
+        public static string GymAccessLogAdded = "Spor salonu erişim kaydı eklendi.";
+        public static string GymAccessLogUpdated = "Spor salonu erişim kaydı güncellendi.";
+        public static string GymAccessLogDeleted = "Spor salonu erişim kaydı silindi.";
         
-        public string GymCapacityAdded { get; set; } = "Spor salonu kapasitesi eklendi.";
-        public string GymCapacityUpdated { get; set; } = "Spor salonu kapasitesi güncellendi.";
-        public string GymCapacityDeleted { get; set; } = "Spor salonu kapasitesi silindi.";
+        public static string GymCapacityAdded = "Spor salonu kapasitesi eklendi.";
+        public static string GymCapacityUpdated = "Spor salonu kapasitesi güncellendi.";
+        public static string GymCapacityDeleted = "Spor salonu kapasitesi silindi.";
         
-        public string MemberCampaignAdded { get; set; } = "Üye kampanyası eklendi.";
-        public string MemberCampaignUpdated { get; set; } = "Üye kampanyası güncellendi.";
-        public string MemberCampaignDeleted { get; set; } = "Üye kampanyası silindi.";
+        public static string MemberCampaignAdded = "Üye kampanyası eklendi.";
+        public static string MemberCampaignUpdated = "Üye kampanyası güncellendi.";
+        public static string MemberCampaignDeleted = "Üye kampanyası silindi.";
         
-        public string MemberMeasurementAdded { get; set; } = "Üye ölçümü eklendi.";
-        public string MemberMeasurementUpdated { get; set; } = "Üye ölçümü güncellendi.";
-        public string MemberMeasurementDeleted { get; set; } = "Üye ölçümü silindi.";
+        public static string MemberMeasurementAdded = "Üye ölçümü eklendi.";
+        public static string MemberMeasurementUpdated = "Üye ölçümü güncellendi.";
+        public static string MemberMeasurementDeleted = "Üye ölçümü silindi.";
         
-        public string MemberAdded { get; set; } = "Üye eklendi.";
-        public string MemberUpdated { get; set; } = "Üye güncellendi.";
-        public string MemberDeleted { get; set; } = "Üye silindi.";
+        public static string MemberAdded = "Üye eklendi.";
+        public static string MemberUpdated = "Üye güncellendi.";
+        public static string MemberDeleted = "Üye silindi.";
         
-        public string PackageAdded { get; set; } = "Paket eklendi.";
-        public string PackageUpdated { get; set; } = "Paket güncellendi.";
-        public string PackageDeleted { get; set; } = "Paket silindi.";
+        public static string PackageAdded = "Paket eklendi.";
+        public static string PackageUpdated = "Paket güncellendi.";
+        public static string PackageDeleted = "Paket silindi.";
         
-        public string PaymentAdded { get; set; } = "Ödeme eklendi.";
-        public string PaymentUpdated { get; set; } = "Ödeme güncellendi.";
-        public string PaymentDeleted { get; set; } = "Ödeme silindi.";
+        public static string PaymentAdded = "Ödeme eklendi.";
+        public static string PaymentUpdated = "Ödeme güncellendi.";
+        public static string PaymentDeleted = "Ödeme silindi.";
         
-        public string RoleAdded { get; set; } = "Rol eklendi.";
-        public string RoleUpdated { get; set; } = "Rol güncellendi.";
-        public string RoleDeleted { get; set; } = "Rol silindi.";
+        public static string RoleAdded = "Rol eklendi.";
+        public static string RoleUpdated = "Rol güncellendi.";
+        public static string RoleDeleted = "Rol silindi.";
         
-        public string SubscriptionAdded { get; set; } = "Abonelik eklendi.";
-        public string SubscriptionUpdated { get; set; } = "Abonelik güncellendi.";
-        public string SubscriptionDeleted { get; set; } = "Abonelik silindi.";
+        public static string SubscriptionAdded = "Abonelik eklendi.";
+        public static string SubscriptionUpdated = "Abonelik güncellendi.";
+        public static string SubscriptionDeleted = "Abonelik silindi.";
         
-        public string TrainerAssignmentAdded { get; set; } = "Eğitmen ataması eklendi.";
-        public string TrainerAssignmentUpdated { get; set; } = "Eğitmen ataması güncellendi.";
-        public string TrainerAssignmentDeleted { get; set; } = "Eğitmen ataması silindi.";
+        public static string TrainerAssignmentAdded = "Eğitmen ataması eklendi.";
+        public static string TrainerAssignmentUpdated = "Eğitmen ataması güncellendi.";
+        public static string TrainerAssignmentDeleted = "Eğitmen ataması silindi.";
         
-        public string TrainerAdded { get; set; } = "Eğitmen eklendi.";
-        public string TrainerUpdated { get; set; } = "Eğitmen güncellendi.";
-        public string TrainerDeleted { get; set; } = "Eğitmen silindi.";
+        public static string TrainerAdded = "Eğitmen eklendi.";
+        public static string TrainerUpdated = "Eğitmen güncellendi.";
+        public static string TrainerDeleted = "Eğitmen silindi.";
         
-        public string TrainerScheduleAdded { get; set; } = "Eğitmen programı eklendi.";
-        public string TrainerScheduleUpdated { get; set; } = "Eğitmen programı güncellendi.";
-        public string TrainerScheduleDeleted { get; set; } = "Eğitmen programı silindi.";
+        public static string TrainerScheduleAdded = "Eğitmen programı eklendi.";
+        public static string TrainerScheduleUpdated = "Eğitmen programı güncellendi.";
+        public static string TrainerScheduleDeleted = "Eğitmen programı silindi.";
         
-        public string UserRoleAdded { get; set; } = "Kullanıcı rolü eklendi.";
-        public string UserRoleUpdated { get; set; } = "Kullanıcı rolü güncellendi.";
-        public string UserRoleDeleted { get; set; } = "Kullanıcı rolü silindi.";
+        public static string UserRoleAdded = "Kullanıcı rolü eklendi.";
+        public static string UserRoleUpdated = "Kullanıcı rolü güncellendi.";
+        public static string UserRoleDeleted = "Kullanıcı rolü silindi.";
         
-        public string UserAdded { get; set; } = "Kullanıcı eklendi.";
-        public string UserUpdated { get; set; } = "Kullanıcı güncellendi.";
-        public string UserDeleted { get; set; } = "Kullanıcı silindi.";
+        public static string UserAdded = "Kullanıcı eklendi.";
+        public static string UserUpdated = "Kullanıcı güncellendi.";
+        public static string UserDeleted = "Kullanıcı silindi.";
         
-        public string ErrorOccurred { get; set; } = "Bir hata oluştu.";
-        public string NotFound { get; set; } = "Bulunamadı.";
-        public string ValidationFailed { get; set; } = "Doğrulama başarısız oldu.";
-        public string UnauthorizedAccess { get; set; } = "Yetkisiz erişim.";
-        public string OperationFailed { get; set; } = "İşlem başarısız oldu.";
+        public static string ErrorOccurred = "Bir hata oluştu.";
+        public static string NotFound = "Bulunamadı.";
+        public static string ValidationFailed = "Doğrulama başarısız oldu.";
+        public static string UnauthorizedAccess = "Yetkisiz erişim.";
+        public static string OperationFailed = "İşlem başarısız oldu.";
+        
+        public static string Success = "Başarılı bir şekilde listelendi.";
     }
 }

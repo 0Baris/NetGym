@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using Core.Utilities.Results;
 using Entities.Concrete;
 
 namespace Business.Abstract
 {
     public interface IRoleService
     {
-        Role GetById(int roleId);
-        List<Role> GetAll();
-        void Add(Role role);
-        void Update(Role role);
-        void Delete(int roleId);
-        List<Role> GetRolesByUserId(int userId);
+        IDataResult<Role> GetById(int roleId);
+        IDataResult<List<Role>> GetAll();
+        IResult Add(Role role);
+        IResult Update(Role role);
+        IResult Delete(int roleId);
+        IDataResult<List<Role>> GetRolesByUserId(int userId);
     }
 }

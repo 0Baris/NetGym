@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using Core.Utilities.Results;
 using Entities.Concrete;
 
 namespace Business.Abstract
 {
     public interface IDealerMemberService
     {
-        List<DealerMember> GetAll(int dealerId);
-        DealerMember GetById(int dealerMemberId);
-        void Add(DealerMember dealerMember);
-        void Update(DealerMember dealerMember);
-        void Delete(DealerMember dealerMember);
+        IDataResult<List<DealerMember>> GetAll(int dealerId);
+        IDataResult<DealerMember> GetById(int dealerMemberId);
+        IResult Add(DealerMember dealerMember);
+        IResult Update(DealerMember dealerMember);
+        IResult Delete(int dealerMemberId);
         
     }
 }

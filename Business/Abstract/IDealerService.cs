@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
+using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
     public interface IDealerService
     {
-        List<Dealer> GetAll();
+        IDataResult<List<Dealer>> GetAll();
         Dealer GetById(int dealerId);
-        void Add(Dealer dealer);
-        void Update(Dealer dealer);
-        void Delete(Dealer dealer);
-        List<Dealer> GetByCampaignId(int campaignId);
-        List<Dealer> GetByCampaignIdAndIsActive(int campaignId, byte isActive);
+        IResult Add(Dealer dealer);
+        IResult Update(Dealer dealer);
+        IResult Delete(int dealerId);
+        IDataResult<List<DealerDetailsDto>> GetDealerDetails();
+        IDataResult<List<Dealer>> GetByCampaignId(int campaignId);
+        IDataResult<List<Dealer>> GetByCampaignIdAndIsActive(int campaignId, byte isActive);
         
         
     }

@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
+using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
     public interface ITrainerService
     {
-        void Add(Trainer trainer);
-        void Update(Trainer trainer);
-        void Delete(int trainerId);
-        List<Trainer> GetList();
-        Trainer GetById(int trainerId);
+        IResult Add(Trainer trainer);
+        IResult Update(Trainer trainer);
+        IResult Delete(int trainerId);
+        IDataResult<List<Trainer>> GetAll();
+        IDataResult<List<TrainerDetailDto>> GetTrainerDetails();
+        IDataResult<Trainer> GetById(int trainerId);
     }
 }
