@@ -79,7 +79,21 @@
         public static string ValidationFailed = "Doğrulama başarısız oldu.";
         public static string UnauthorizedAccess = "Yetkisiz erişim.";
         public static string OperationFailed = "İşlem başarısız oldu.";
-        
+        public static string InvalidStatus => "Geçerli bir durum değeri olmalıdır (0: Pasif, 1: Aktif)";
+
         public static string Success = "Başarılı bir şekilde listelendi.";
+        
+        // Validasyonlar için gereken mesajlar
+        public static string CompanyNameLength = "Şirket adı 2-50 karakter arasında olmalıdır.";
+        public static string MemberIdInvalid = "Geçerli bir üye ID'si gereklidir.";
+        public static string UserIdInvalid = "Geçerli bir kullanıcı ID'si gereklidir.";
+        public static string DealerIdInvalid = "Geçerli bir bayi ID'si gereklidir.";
+        
+        // Ekstra validasyon mesajları
+        public static string RegionLength = "Bölge bilgisi 2-50 karakter arasında olmalıdır.";
+        public static string TaxNumberLength = "Vergi numarası 10-11 karakter olmalıdır.";
+        public static string AccessDateRequired = "Giriş tarihi gereklidir.";
+        public static string InvalidAccessType = "Geçersiz giriş/çıkış tipi.";
+        public static string DeviceIdInvalid = "Geçerli bir cihaz ID'si gereklidir.";
     }
 }
