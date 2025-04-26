@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Business.Abstract;
-using Business.Constants.Messages;
+using Core.Constants.Messages;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -26,15 +30,34 @@ namespace Business.Concrete
             return new SuccessDataResult<Campaign>(_campaignDal.Get(c=> c.CampaignId == campaignId), TurkishMessages.Success);
         }
 
+        [ValidationAspect(typeof(CampaignValidator))]
         public IResult Add(Campaign campaign)
         {
+            IResult result = BusinessRules.Run(
+                CheckIfCampaignExists(campaign.Name),
+                            CheckIfCampaignLimitExceeded());
+            
+            if (result != null)
+            {
+                return result;
+            }
+            
             _campaignDal.Add(campaign);
             
             return new SuccessResult(TurkishMessages.CampaignAdded);
         }
 
+        [ValidationAspect(typeof(CampaignValidator))]
         public IResult Update(Campaign campaign)
         {
+            IResult result = BusinessRules.Run(
+                CheckIfCampaignExists(campaign.Name));
+            
+            if (result != null)
+            {
+                return result;
+            }
+            
             _campaignDal.Update(campaign);
             
             return new SuccessResult(TurkishMessages.CampaignUpdated);
@@ -42,19 +65,42 @@ namespace Business.Concrete
 
         public IResult Delete(int campaignId)
         {
-            if (campaignId <= 0)
+            var result = BusinessRules.ValidateEntityExistence(
+                _campaignDal,
+                campaignId, 
+                c => c.CampaignId == campaignId);
+
+            if (result != null)
             {
-                return new ErrorResult(TurkishMessages.ErrorOccurred);
-            }
-            if (_campaignDal.Get(c => c.CampaignId == campaignId) == null)
-            {
-                return new ErrorResult(TurkishMessages.ErrorOccurred);
+                return result;
             }
             
             var campaign = _campaignDal.Get(c => c.CampaignId == campaignId);
             _campaignDal.Delete(campaign);
             
             return new SuccessResult(TurkishMessages.CampaignDeleted);
+        }
+
+        private IResult CheckIfCampaignExists(string campaignName)
+        {
+            var result = _campaignDal.GetAll(c => c.Name == campaignName).Any();
+            if (result)
+            {
+                return new ErrorResult(TurkishMessages.NameAlreadyExists);
+            }
+
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfCampaignLimitExceeded()
+        {
+            var result = _campaignDal.GetAll().Count;
+            if (result >= 7)
+            {
+                return new ErrorResult(TurkishMessages.CampaignLimitExceeded);
+            }
+
+            return new SuccessResult();
         }
     }
 }

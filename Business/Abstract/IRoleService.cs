@@ -11,6 +11,5 @@ namespace Business.Abstract
         IResult Add(Role role);
         IResult Update(Role role);
         IResult Delete(int roleId);
-        IDataResult<List<Role>> GetRolesByUserId(int userId);
     }
 }

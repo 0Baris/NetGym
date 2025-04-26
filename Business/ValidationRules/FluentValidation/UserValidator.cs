@@ -1,5 +1,5 @@
 ﻿using System;
-using Business.Constants.Messages;
+using Core.Constants.Messages;
 using Business.Enums;
 using Entities.Concrete;
 using FluentValidation;

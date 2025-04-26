@@ -1,7 +1,14 @@
-﻿namespace Business.Constants.Messages
+﻿namespace Core.Constants.Messages
 {
     public class TurkishMessages
     {
+        public static string IdentityNumberAlreadyExists = "Bu kimlik numarası zaten mevcut.";
+        public static string TrainerAlreadyExists = "Bu eğitmen zaten mevcut.";
+        public static string UserPhoneNumberAlreadyExists = "Telefon numarası zaten mevcut.";
+        public static string NameAlreadyExists = "Bu isim zaten mevcut.";
+        public static string NameCannotBeEmpty = "İsim boş olamaz.";
+        public static string NameLengthError = "İsim 2-50 karakter arasında olmalıdır.";
+
         public static string CampaignAdded = "Kampanya eklendi.";
         public static string CampaignUpdated = "Kampanya güncellendi.";
         public static string CampaignDeleted = "Kampanya silindi.";
@@ -95,5 +102,7 @@
         public static string AccessDateRequired = "Giriş tarihi gereklidir.";
         public static string InvalidAccessType = "Geçersiz giriş/çıkış tipi.";
         public static string DeviceIdInvalid = "Geçerli bir cihaz ID'si gereklidir.";
+        
+        public static string CampaignLimitExceeded = "Kampanya limiti aşıldı, en fazla 6 kampanya eklenebilir.";
     }
 }

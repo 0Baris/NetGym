@@ -13,5 +13,7 @@ namespace Business.Abstract
         IDataResult<List<Trainer>> GetAll();
         IDataResult<List<TrainerDetailDto>> GetTrainerDetails();
         IDataResult<Trainer> GetById(int trainerId);
+        IDataResult<TrainerDetailDto> GetTrainerDetailsById(int trainerId);
+        
     }
 }

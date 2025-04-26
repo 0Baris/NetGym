@@ -8,11 +8,13 @@ namespace Business.Abstract
     public interface IMemberService
     {
         IDataResult<List<Member>> GetAll();
-        IDataResult<List<Member>> GetAllByDetails();
         IDataResult<List<MemberDetailDto>> GetMemberDetails();
-        IDataResult<Member> GetById(int id);
+        IDataResult<List<MemberDetailDto>> GetMemberDetailsById(int memberId);
+        IDataResult<List<MemberCampaignDetailDto>> GetMemberCampaignDetails();
+        IDataResult<List<MemberCampaignDetailDto>> GetMemberCampaignDetailByUserId(int userId);
+        IDataResult<Member> GetById(int memberId);
         IResult Add(Member member);
         IResult Update(Member member);
-        IResult Delete(int id);
+        IResult Delete(int memberId);
     }
 }
