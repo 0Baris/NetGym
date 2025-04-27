@@ -1,56 +1,107 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Constants.Messages;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
+using DataAccess.Abstract;
+using Entities.Concrete;
 using Entities.DTOs;
 
 namespace Business.Concrete
 {
     public class SubscriptionManager : ISubscriptionService
     {
-        public IDataResult<List<SubscriptionDetailDto>> GetAll()
+        
+        private readonly ISubscriptionDal _subscriptionDal;
+        private readonly IMemberDal _memberDal;
+        private readonly IPackageDal _packageDal;
+
+        public SubscriptionManager(ISubscriptionDal subscriptionDal, IMemberDal memberDal, IPackageDal packageDal)
         {
-            throw new System.NotImplementedException();
+            _subscriptionDal = subscriptionDal;
+            _memberDal = memberDal;
+            _packageDal = packageDal;
         }
 
-        public IDataResult<SubscriptionDetailDto> GetById(int subscriptionId)
+        public IDataResult<List<Subscription>> GetAll()
         {
-            throw new System.NotImplementedException();
+            return new SuccessDataResult<List<Subscription>>(_subscriptionDal.GetAll(), TurkishMessages.Success);
         }
 
-
-        public IResult Add(SubscriptionDetailDto subscription)
+        public IDataResult<Subscription> GetById(int subscriptionId)
         {
-            throw new System.NotImplementedException();
+            return new SuccessDataResult<Subscription>(_subscriptionDal.Get(c => c.SubscriptionId == subscriptionId));
         }
 
-        public IResult Update(SubscriptionDetailDto subscription)
+        [ValidationAspect(typeof(SubscriptionValidator))]
+        public IResult Add(Subscription subscription)
         {
-            throw new System.NotImplementedException();
+            var result = BusinessRules.Run(CheckIfMemberExists(subscription.MemberId), CheckIfPackageExists(subscription.PackageId));
+        
+            if (result != null)
+            {
+                return result;
+            }
+            
+            _subscriptionDal.Add(subscription);
+            return new SuccessResult(TurkishMessages.SubscriptionAdded);
+        }
+        
+        [ValidationAspect(typeof(SubscriptionValidator))]
+        public IResult Update(Subscription subscription)
+        {
+            var result = BusinessRules.Run(CheckIfMemberExists(subscription.MemberId), CheckIfPackageExists(subscription.PackageId));
+        
+            if (result != null)
+            {
+                return result;
+            }
+            
+            _subscriptionDal.Update(subscription);
+            return new SuccessResult(TurkishMessages.SubscriptionUpdated);
         }
 
         public IResult Delete(int subscriptionId)
         {
-            throw new System.NotImplementedException();
+            BusinessRules.ValidateEntityExistence(
+                _subscriptionDal, subscriptionId, s => s.SubscriptionId == subscriptionId);
+            
+            var subscriptionToDelete = _subscriptionDal.Get(s => s.SubscriptionId == subscriptionId);
+            _subscriptionDal.Delete(subscriptionToDelete);
+            return new SuccessResult(TurkishMessages.SubscriptionDeleted);
         }
 
         public IDataResult<List<SubscriptionDetailDto>> GetAllByDetails()
         {
-            throw new System.NotImplementedException();
+            return new SuccessDataResult<List<SubscriptionDetailDto>>(_subscriptionDal.GetSubscriptionDetails(), TurkishMessages.Success);
         }
 
-        public IDataResult<List<SubscriptionDetailDto>> GetAllByDetailsById(int subscriptionId)
+        public IDataResult<List<SubscriptionDetailDto>> GetDetailsById(int subscriptionId)
         {
-            throw new System.NotImplementedException();
+            return new SuccessDataResult<List<SubscriptionDetailDto>>(_subscriptionDal.GetSubscriptionDetailById(subscriptionId), TurkishMessages.Success);
+        }
+        
+        private IResult CheckIfMemberExists(int memberId)
+        {
+            var result = _memberDal.Get(m => m.MemberId == memberId);
+            if (result == null)
+            {
+                return new ErrorResult(TurkishMessages.ErrorOccurred);
+            }
+            return new SuccessResult();
         }
 
-        public IDataResult<List<SubscriptionDetailDto>> GetSubscriptionDetails()
+        private IResult CheckIfPackageExists(int packageId)
         {
-            throw new System.NotImplementedException();
+            var result = _packageDal.Get(p => p.PackageId == packageId);
+            if (result == null)
+            {
+                return new ErrorResult(TurkishMessages.ErrorOccurred);
+            }
+            return new SuccessResult();
         }
-
-        public IDataResult<List<SubscriptionDetailDto>> GetSubscriptionDetailsById(int subscriptionId)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }
