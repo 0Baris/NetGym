@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Constants.Messages;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -32,6 +33,7 @@ namespace Business.Concrete
             return new SuccessDataResult<DealerMember>(_dealerMemberDal.Get(dm => dm.Id == dealerMemberId));
         }
 
+        [SecuredOperation("admin,dealerMember.add")]
         [ValidationAspect(typeof(DealerMemberValidator))]
         public IResult Add(DealerMember dealerMember)
         {
@@ -47,6 +49,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.DealerMemberAdded);
         }
         
+        [SecuredOperation("admin,dealerMember.update")]
         [ValidationAspect(typeof(DealerMemberValidator))]
         public IResult Update(DealerMember dealerMember)
         {
@@ -63,6 +66,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.DealerMemberUpdated);
         }
 
+        [SecuredOperation("admin,dealerMember.delete")]
         public IResult Delete(int dealerMemberId)
         {
             var result = BusinessRules.ValidateEntityExistence(

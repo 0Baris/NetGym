@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Constants.Messages;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -30,6 +31,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Campaign>(_campaignDal.Get(c=> c.CampaignId == campaignId), TurkishMessages.Success);
         }
 
+        [SecuredOperation("admin,campaign.add")]
         [ValidationAspect(typeof(CampaignValidator))]
         public IResult Add(Campaign campaign)
         {
@@ -47,6 +49,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.CampaignAdded);
         }
 
+        [SecuredOperation("admin,campaign.update")]
         [ValidationAspect(typeof(CampaignValidator))]
         public IResult Update(Campaign campaign)
         {
@@ -63,6 +66,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.CampaignUpdated);
         }
 
+        [SecuredOperation("admin,campaign.delete")]
         public IResult Delete(int campaignId)
         {
             var result = BusinessRules.ValidateEntityExistence(

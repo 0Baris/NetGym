@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Constants.Messages;
@@ -23,6 +24,7 @@ namespace Business.Concrete
             _userDal = userDal;
         }
         
+        [SecuredOperation("admin,trainer.add")]
         [ValidationAspect(typeof(TrainerValidator))]
         public IResult Add(Trainer trainer)
         {
@@ -38,6 +40,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.TrainerAdded);
         }
 
+        [SecuredOperation("admin,trainer.update")]
         [ValidationAspect(typeof(TrainerValidator))]
         public IResult Update(Trainer trainer)
         {
@@ -53,6 +56,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.TrainerUpdated);
         }
 
+        [SecuredOperation("admin,trainer.delete")]
         public IResult Delete(int trainerId)
         {
             var result = BusinessRules.ValidateEntityExistence(

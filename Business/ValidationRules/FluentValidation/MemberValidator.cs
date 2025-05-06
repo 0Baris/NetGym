@@ -1,5 +1,6 @@
 ﻿using System;
 using Business.Enums;
+using Core.Constants.Messages;
 using Entities.Concrete;
 using FluentValidation;
 
@@ -15,8 +16,7 @@ namespace Business.ValidationRules.FluentValidation
                 .NotEmpty();
 
             RuleFor(m => m.IdentityNumber)
-                .NotEmpty()
-                .Length(11);
+                .Must(IsValidIdentityNumber).WithMessage(TurkishMessages.InvalidIdentityNumber);
             
             RuleFor(m => m.BirthDate)
                 .NotEmpty()
@@ -31,6 +31,24 @@ namespace Business.ValidationRules.FluentValidation
                 .WithMessage("Cinsiyet geçerli bir değer olmalıdır (F: Kadın, M: Erkek).");
             
         }      
+        
+        public bool IsValidIdentityNumber(string identityNumber)
+        {
+            if (identityNumber.Length != 11)
+                return false;
+
+            if (!long.TryParse(identityNumber, out long idNumber))
+                return false;
+
+            int sum = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                sum += (int)(idNumber % 10);
+                idNumber /= 10;
+            }
+
+            return sum % 10 == (idNumber % 10);
+        }
 
     }
 }

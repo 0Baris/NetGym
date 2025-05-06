@@ -1,7 +1,11 @@
-﻿namespace Core.Constants.Messages
+﻿using Core.Entities.Concrete;
+
+namespace Core.Constants.Messages
 {
     public class TurkishMessages
     {
+        public static string AuthorizationDenied = "Yetkisiz erişim.";
+        public static string InvalidIdentityNumber = "Kimlik numarası geçersiz.";
         public static string IdentityNumberAlreadyExists = "Bu kimlik numarası zaten mevcut.";
         public static string TrainerAlreadyExists = "Bu eğitmen zaten mevcut.";
         public static string UserPhoneNumberAlreadyExists = "Telefon numarası zaten mevcut.";
@@ -73,13 +77,12 @@
         public static string TrainerScheduleUpdated = "Eğitmen programı güncellendi.";
         public static string TrainerScheduleDeleted = "Eğitmen programı silindi.";
         
-        public static string UserRoleAdded = "Kullanıcı rolü eklendi.";
-        public static string UserRoleUpdated = "Kullanıcı rolü güncellendi.";
-        public static string UserRoleDeleted = "Kullanıcı rolü silindi.";
-        
-        public static string UserAdded = "Kullanıcı eklendi.";
-        public static string UserUpdated = "Kullanıcı güncellendi.";
-        public static string UserDeleted = "Kullanıcı silindi.";
+        public static string UserRegisterSuccess = "Kullanıcı başarıyla kaydedildi.";
+        public static string UserNotFound = "Kullanıcı bulunamadı.";
+        public static string PasswordError = "Şifre hatalı.";
+        public static string SuccessfulLogin = "Başarıyla giriş yapıldı.";
+        public static string UserAlreadyExists = "Bu e-posta adresiyle bir kullanıcı zaten mevcut.";
+        public static string AccessTokenCreated = "Erişim tokenı oluşturuldu.";
         
         public static string ErrorOccurred = "Bir hata oluştu.";
         public static string NotFound = "Bulunamadı.";
@@ -104,5 +107,6 @@
         public static string DeviceIdInvalid = "Geçerli bir cihaz ID'si gereklidir.";
         
         public static string CampaignLimitExceeded = "Kampanya limiti aşıldı, en fazla 6 kampanya eklenebilir.";
+
     }
 }

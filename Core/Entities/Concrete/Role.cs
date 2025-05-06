@@ -1,7 +1,6 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Concrete;
 
-namespace Entities.Concrete
-{
+namespace Core.Entities.Concrete{
     public class Role : IEntity
     {
         public int RoleId { get; set; }

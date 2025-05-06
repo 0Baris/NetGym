@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Constants.Messages;
@@ -29,6 +30,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Package>>(_packageDal.GetAll(), TurkishMessages.Success);
         }
 
+        [SecuredOperation("admin,package.add")]
         [ValidationAspect(typeof(PackageValidator))]
         public IResult Add(Package package)
         {
@@ -44,7 +46,8 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.PackageAdded);
             
         }
-
+        
+        [SecuredOperation("admin,package.update")]
         [ValidationAspect(typeof(PackageValidator))]
         public IResult Update(Package package)
         {
@@ -60,6 +63,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.PackageUpdated);
         }
 
+        [SecuredOperation("admin,package.delete")]
         public IResult Delete(int packageId)
         {
             var result = BusinessRules.ValidateEntityExistence(_packageDal, packageId,p => p.PackageId == packageId);
