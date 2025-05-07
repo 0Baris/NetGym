@@ -11,8 +11,8 @@ namespace Business.Abstract
         IResult Update(Trainer trainer);
         IResult Delete(int trainerId);
         IDataResult<List<Trainer>> GetAll();
-        IDataResult<List<TrainerDetailDto>> GetTrainerDetails();
         IDataResult<Trainer> GetById(int trainerId);
+        IDataResult<List<TrainerDetailDto>> GetTrainerDetails();
         IDataResult<TrainerDetailDto> GetTrainerDetailsById(int trainerId);
         
     }

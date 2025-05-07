@@ -14,7 +14,8 @@ namespace Core.Extensions
 
         public static List<string> ClaimRoles(this ClaimsPrincipal claimsPrincipal)
         {
-            return claimsPrincipal?.Claims(ClaimTypes.Role);
+            var roleClaims = claimsPrincipal?.FindAll("http://schemas.microsoft.com/ws/2008/06/identity/claims/role");
+            return roleClaims?.Select(c => c.Value).ToList() ?? new List<string>();
         }
     }
 }

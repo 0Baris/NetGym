@@ -31,7 +31,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Campaign>(_campaignDal.Get(c=> c.CampaignId == campaignId), TurkishMessages.Success);
         }
 
-        [SecuredOperation("admin,campaign.add")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(CampaignValidator))]
         public IResult Add(Campaign campaign)
         {
@@ -49,30 +49,34 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.CampaignAdded);
         }
 
-        [SecuredOperation("admin,campaign.update")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(CampaignValidator))]
         public IResult Update(Campaign campaign)
         {
-            IResult result = BusinessRules.Run(
+            var result = BusinessRules.Run(
+                BusinessRules.ValidateEntityExistence(
+                _campaignDal,
+                campaign.CampaignId,
+                c => c.CampaignId == campaign.CampaignId), 
                 CheckIfCampaignExists(campaign.Name));
-            
+
             if (result != null)
             {
                 return result;
             }
-            
+
             _campaignDal.Update(campaign);
-            
             return new SuccessResult(TurkishMessages.CampaignUpdated);
         }
 
-        [SecuredOperation("admin,campaign.delete")]
+        [SecuredOperation("admin,dealer.admin")]
         public IResult Delete(int campaignId)
         {
             var result = BusinessRules.ValidateEntityExistence(
                 _campaignDal,
                 campaignId, 
-                c => c.CampaignId == campaignId);
+                c => c.CampaignId == campaignId)
+                ;
 
             if (result != null)
             {

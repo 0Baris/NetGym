@@ -24,7 +24,7 @@ namespace Business.Concrete
             _userDal = userDal;
         }
         
-        [SecuredOperation("admin,trainer.add")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(TrainerValidator))]
         public IResult Add(Trainer trainer)
         {
@@ -40,7 +40,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.TrainerAdded);
         }
 
-        [SecuredOperation("admin,trainer.update")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(TrainerValidator))]
         public IResult Update(Trainer trainer)
         {
@@ -56,7 +56,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.TrainerUpdated);
         }
 
-        [SecuredOperation("admin,trainer.delete")]
+        [SecuredOperation("admin,dealer.admin")]
         public IResult Delete(int trainerId)
         {
             var result = BusinessRules.ValidateEntityExistence(

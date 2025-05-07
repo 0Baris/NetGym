@@ -8,5 +8,6 @@ namespace DataAccess.Abstract
     public interface IDealerDal : IEntityRepository<Dealer>
     {
         List<DealerDetailsDto> GetDealerDetails();
+        List<DealerDetailsDto> GetDealerDetailsById(int dealerId);
     }
 }

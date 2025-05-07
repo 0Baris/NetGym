@@ -33,7 +33,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Dealer>(_dealerDal.Get(d => d.DealerId == dealerId));
         }
 
-        [SecuredOperation("admin,dealer.add")]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(DealerValidator))]
         public IResult Add(Dealer dealer)
         {
@@ -49,7 +49,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.DealerAdded);
         }
         
-        [SecuredOperation("admin,dealer.update")]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(DealerValidator))]
         public IResult Update(Dealer dealer)
         {
@@ -65,7 +65,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.DealerUpdated);
         }
         
-        [SecuredOperation("admin,dealer.delete")]
+        [SecuredOperation("admin")]
         public IResult Delete(int dealerId)
         {
             var result = BusinessRules.ValidateEntityExistence(_dealerDal, dealerId , d => d.DealerId == dealerId);
@@ -83,7 +83,12 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<DealerDetailsDto>>(_dealerDal.GetDealerDetails(), TurkishMessages.Success);
         }
-        
+
+        public IDataResult<List<DealerDetailsDto>> GetDealerDetailsById(int dealerId)
+        {
+            return new SuccessDataResult<List<DealerDetailsDto>>(_dealerDal.GetDealerDetailsById(dealerId), TurkishMessages.Success);
+        }
+
         private IResult CheckIfDealerExists(string dealerName)
         {
             var result = _dealerDal.GetAll(d => d.CompanyName == dealerName).Any();

@@ -8,6 +8,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -23,17 +24,12 @@ namespace Business.Concrete
         }
 
         
-        public IDataResult<List<DealerMember>> GetAll(int dealerId)
+        public IDataResult<List<DealerWithMembersDto>> GetAllWithDealers(int dealerId)
         {
-            return new SuccessDataResult<List<DealerMember>>(_dealerMemberDal.GetAll());
+            return new SuccessDataResult<List<DealerWithMembersDto>>(_dealerMemberDal.GetDealerWithMembers(dealerId), TurkishMessages.Success);
         }
 
-        public IDataResult<DealerMember> GetById(int dealerMemberId)
-        {
-            return new SuccessDataResult<DealerMember>(_dealerMemberDal.Get(dm => dm.Id == dealerMemberId));
-        }
-
-        [SecuredOperation("admin,dealerMember.add")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(DealerMemberValidator))]
         public IResult Add(DealerMember dealerMember)
         {
@@ -49,7 +45,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.DealerMemberAdded);
         }
         
-        [SecuredOperation("admin,dealerMember.update")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(DealerMemberValidator))]
         public IResult Update(DealerMember dealerMember)
         {
@@ -66,7 +62,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.DealerMemberUpdated);
         }
 
-        [SecuredOperation("admin,dealerMember.delete")]
+        [SecuredOperation("admin,dealer.admin")]
         public IResult Delete(int dealerMemberId)
         {
             var result = BusinessRules.ValidateEntityExistence(

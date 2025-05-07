@@ -30,7 +30,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Package>>(_packageDal.GetAll(), TurkishMessages.Success);
         }
 
-        [SecuredOperation("admin,package.add")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(PackageValidator))]
         public IResult Add(Package package)
         {
@@ -47,7 +47,7 @@ namespace Business.Concrete
             
         }
         
-        [SecuredOperation("admin,package.update")]
+        [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(PackageValidator))]
         public IResult Update(Package package)
         {
@@ -63,7 +63,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.PackageUpdated);
         }
 
-        [SecuredOperation("admin,package.delete")]
+        [SecuredOperation("admin,dealer.admin")]
         public IResult Delete(int packageId)
         {
             var result = BusinessRules.ValidateEntityExistence(_packageDal, packageId,p => p.PackageId == packageId);

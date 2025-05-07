@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Constants.Messages;
@@ -51,6 +52,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Member>(_memberDal.Get(u => u.MemberId == memberId), TurkishMessages.Success);
         }
 
+        [SecuredOperation("admin,member.admin")]
         [ValidationAspect(typeof(MemberValidator))]
         public IResult Add(Member member)
         {
@@ -69,22 +71,28 @@ namespace Business.Concrete
             
         }
         
+        [SecuredOperation("admin,member.admin")]
         [ValidationAspect(typeof(MemberValidator))]
         public IResult Update(Member member)
         {
-            IResult result = BusinessRules.Run(
-                CheckIfMemberIdentityExists(member.IdentityNumber));
-            
+            var result = BusinessRules.Run(
+                BusinessRules.ValidateEntityExistence(
+                    _memberDal,
+                    member.MemberId,
+                    m => m.MemberId == member.MemberId),
+                CheckIfMemberIdentityExistsForUpdate(member));
+
             if (result != null)
             {
                 return result;
             }
 
             _memberDal.Update(member);
-            
+
             return new SuccessResult(TurkishMessages.MemberUpdated);
         }
 
+        [SecuredOperation("admin,dealer.admin")]
         public IResult Delete(int memberId)
         {
             var result = BusinessRules.ValidateEntityExistence(
@@ -113,6 +121,18 @@ namespace Business.Concrete
 
             return new SuccessResult();
         }
-    }
         
+        private IResult CheckIfMemberIdentityExistsForUpdate(Member member)
+        {
+            var existingMember = _memberDal.Get(m => m.IdentityNumber == member.IdentityNumber 
+                                                     && m.MemberId != member.MemberId);
+            if (existingMember != null)
+            {
+                return new ErrorResult(TurkishMessages.IdentityNumberAlreadyExists);
+            }
+
+            return new SuccessResult();
+        }
+        
+    }
 }

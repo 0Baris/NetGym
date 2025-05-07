@@ -14,6 +14,5 @@ namespace Business.Abstract
         IResult Delete(int subscriptionId);
         IDataResult<List<SubscriptionDetailDto>> GetAllByDetails();
         IDataResult<List<SubscriptionDetailDto>> GetDetailsById(int subscriptionId);
-        
     }
 }

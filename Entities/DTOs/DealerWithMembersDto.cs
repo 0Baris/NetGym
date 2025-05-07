@@ -3,9 +3,10 @@ using Core.Entities;
 
 namespace Entities.DTOs
 {
-    public class DealerWithMembers : IDto
+    public class DealerWithMembersDto : IDto
     {
         public int DealerId { get; set; }
+        public int MemberId { get; set; }
         public string DealerName { get; set; }
         public string DealerPhoneNumber { get; set; }
         public string DealerEmail { get; set; }

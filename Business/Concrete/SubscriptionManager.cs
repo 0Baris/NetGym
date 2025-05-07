@@ -36,6 +36,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Subscription>(_subscriptionDal.Get(c => c.SubscriptionId == subscriptionId));
         }
 
+        [SecuredOperation("admin,subscription.admin,dealer.admin")]
         [ValidationAspect(typeof(SubscriptionValidator))]
         public IResult Add(Subscription subscription)
         {
@@ -50,6 +51,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.SubscriptionAdded);
         }
         
+        [SecuredOperation("admin,subscription.admin,dealer.admin")]
         [ValidationAspect(typeof(SubscriptionValidator))]
         public IResult Update(Subscription subscription)
         {
@@ -64,6 +66,7 @@ namespace Business.Concrete
             return new SuccessResult(TurkishMessages.SubscriptionUpdated);
         }
 
+        [SecuredOperation("admin,subscription.admin,dealer.admin")]
         public IResult Delete(int subscriptionId)
         {
             BusinessRules.ValidateEntityExistence(
@@ -83,7 +86,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<SubscriptionDetailDto>>(_subscriptionDal.GetSubscriptionDetailById(subscriptionId), TurkishMessages.Success);
         }
-        
+
         private IResult CheckIfMemberExists(int memberId)
         {
             var result = _memberDal.Get(m => m.MemberId == memberId);
