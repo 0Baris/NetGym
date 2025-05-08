@@ -40,7 +40,6 @@ NetGym, spor salonları için kurumsal mimaride geliştirilmiş .Net Core tabanl
 - Entity Framework Core
 - MSSQL Server
 - JWT Authentication
-- Docker
 
 ## Proje Yapısı 📁
 ```
