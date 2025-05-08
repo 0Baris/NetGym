@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Constants.Messages;
 using Core.Utilities.Business;
@@ -25,6 +26,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Package>(_packageDal.Get(p => p.PackageId == packageId), TurkishMessages.Success);
         }
 
+        [CacheAspect]
         public IDataResult<List<Package>> GetAll()
         {
             return new SuccessDataResult<List<Package>>(_packageDal.GetAll(), TurkishMessages.Success);
@@ -32,6 +34,7 @@ namespace Business.Concrete
 
         [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(PackageValidator))]
+        [CacheRemoveAspect("IPackageService.Get")]
         public IResult Add(Package package)
         {
             
@@ -49,6 +52,7 @@ namespace Business.Concrete
         
         [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(PackageValidator))]
+        [CacheRemoveAspect("IPackageService.Get")]
         public IResult Update(Package package)
         {
             var result = BusinessRules.Run(CheckIfPackageExists(package.Name));
@@ -64,6 +68,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin,dealer.admin")]
+        [CacheRemoveAspect("IPackageService.Get")]
         public IResult Delete(int packageId)
         {
             var result = BusinessRules.ValidateEntityExistence(_packageDal, packageId,p => p.PackageId == packageId);

@@ -12,8 +12,6 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
     {
         private IMemoryCache _memoryCache;
         
-        // Adapter Pattern -- Adaptasyon Deseni
-        
         public MemoryCacheManager()
         {
             _memoryCache = ServiceTool.ServiceProvider.GetService<IMemoryCache>();

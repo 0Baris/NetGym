@@ -1,4 +1,8 @@
-﻿namespace Core.Aspects.Autofac.Transaction
+﻿using System.Transactions;
+using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
+
+namespace Core.Aspects.Autofac.Transaction
 {
     public class TransactionScopeAspect : MethodInterception
     {

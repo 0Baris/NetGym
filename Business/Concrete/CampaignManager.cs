@@ -4,6 +4,7 @@ using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Core.Constants.Messages;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -21,6 +22,7 @@ namespace Business.Concrete
             _campaignDal = campaignDal;
         }
         
+        [CacheAspect]
         public IDataResult<List<Campaign>> GetAll()
         {
             return new SuccessDataResult<List<Campaign>>(_campaignDal.GetAll());
@@ -33,6 +35,7 @@ namespace Business.Concrete
 
         [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(CampaignValidator))]
+        [CacheRemoveAspect("ICampaignService.Get")]
         public IResult Add(Campaign campaign)
         {
             IResult result = BusinessRules.Run(
@@ -51,6 +54,7 @@ namespace Business.Concrete
 
         [SecuredOperation("admin,dealer.admin")]
         [ValidationAspect(typeof(CampaignValidator))]
+        [CacheRemoveAspect("ICampaignService.Get")]
         public IResult Update(Campaign campaign)
         {
             var result = BusinessRules.Run(
@@ -70,6 +74,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin,dealer.admin")]
+        [CacheRemoveAspect("ICampaignService.Get")]
         public IResult Delete(int campaignId)
         {
             var result = BusinessRules.ValidateEntityExistence(

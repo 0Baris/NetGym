@@ -3,6 +3,7 @@ using System.Linq;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Constants.Messages;
 using Core.Utilities.Business;
@@ -23,6 +24,7 @@ namespace Business.Concrete
             _dealerDal = dealerDal;
         }
         
+        [CacheAspect]
         public IDataResult<List<Dealer>> GetAll()
         {
             return new SuccessDataResult<List<Dealer>>(_dealerDal.GetAll());
@@ -35,6 +37,7 @@ namespace Business.Concrete
 
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(DealerValidator))]
+        [CacheRemoveAspect("IDealerService.Get")]
         public IResult Add(Dealer dealer)
         {
             IResult result = BusinessRules.Run(
@@ -51,6 +54,7 @@ namespace Business.Concrete
         
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(DealerValidator))]
+        [CacheRemoveAspect("IDealerService.Get")]
         public IResult Update(Dealer dealer)
         {
             IResult result = BusinessRules.Run(
@@ -66,6 +70,7 @@ namespace Business.Concrete
         }
         
         [SecuredOperation("admin")]
+        [CacheRemoveAspect("IDealerService.Get")]
         public IResult Delete(int dealerId)
         {
             var result = BusinessRules.ValidateEntityExistence(_dealerDal, dealerId , d => d.DealerId == dealerId);

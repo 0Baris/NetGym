@@ -22,7 +22,6 @@ NetGym, spor salonları için kurumsal mimaride geliştirilmiş .Net Core tabanl
   - [Kurulum 🚀](#kurulum-)
     - [Gereksinimler 📋](#gereksinimler-)
     - [Adımlar 📝](#adımlar-)
-  - [Yapım Aşamasında 🚧](#yapım-aşamasında-)
   - [Lisans 📄](#lisans-)
 
 ## Mimari Yapı ve Uyulan Standartlar 🏗️
@@ -36,11 +35,11 @@ NetGym, spor salonları için kurumsal mimaride geliştirilmiş .Net Core tabanl
 - ASP.NET Core Web API
 - Fluent Validation
 - Autofac
+- Memory Cache
+- LINQ Sorguları
 - Entity Framework Core
 - MSSQL Server
 - JWT Authentication
-- MongoDB
-- Redis Cache
 - Docker
 
 ## Proje Yapısı 📁
@@ -62,8 +61,7 @@ NetGym/
 - Eğitmen Yönetimi
 - Bayi Yönetimi
 - JWT tabanlı Kimlik Doğrulama 
-- Redis Cache Entegrasyonu
-- MongoDB Log Yönetimi
+- Memory Cache
 
 ## API Endpoints 🔌
 
@@ -128,8 +126,6 @@ NetGym/
 ### Gereksinimler 📋
 - .NET 8.0 SDK
 - MSSQL Server
-- Redis Server
-- Docker
 
 ### Adımlar 📝
 1. Projeyi klonlayın
@@ -142,9 +138,10 @@ git clone https://github.com/0Baris/NetGym.git
 sqlcmd -S localhost -i NetGymDB.sql
 ```
 
-3. Redis'i başlatın
+3. Projenin ana dizinine gidin ve NuGet paketlerini yükleyin
 ```bash
-docker run --name redis -p 6379:6379 -d redis
+cd NetGym
+dotnet restore
 ```
 
 4. Projeyi çalıştırın
@@ -152,11 +149,6 @@ docker run --name redis -p 6379:6379 -d redis
 cd WebAPI
 dotnet run
 ```
-
-## Yapım Aşamasında 🚧
-- [ ] MongoDB Log Yönetimi
-- [ ] Redis Cache Yönetimi
-- [ ] Docker Container Yapılandırması
 
 ## Lisans 📄
 Bu proje MIT lisansı altında lisanslanmıştır.

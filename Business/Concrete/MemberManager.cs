@@ -9,6 +9,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Core.Aspects.Autofac.Caching;
 
 namespace Business.Concrete
 {
@@ -22,11 +23,13 @@ namespace Business.Concrete
             _memberDal = memberDal;
         }
         
+        [CacheAspect]
         public IDataResult<List<Member>> GetAll()
         {
             return new SuccessDataResult<List<Member>>(_memberDal.GetAll());
         }
 
+        [CacheAspect]
         public IDataResult<List<MemberDetailDto>> GetMemberDetails()
         {
             return new SuccessDataResult<List<MemberDetailDto>>(_memberDal.GetMemberDetails());
@@ -54,6 +57,7 @@ namespace Business.Concrete
 
         [SecuredOperation("admin,member.admin")]
         [ValidationAspect(typeof(MemberValidator))]
+        [CacheRemoveAspect("IMemberService.Get")]
         public IResult Add(Member member)
         {
             
@@ -73,6 +77,7 @@ namespace Business.Concrete
         
         [SecuredOperation("admin,member.admin")]
         [ValidationAspect(typeof(MemberValidator))]
+        [CacheRemoveAspect("IMemberService.Get")]
         public IResult Update(Member member)
         {
             var result = BusinessRules.Run(
@@ -93,6 +98,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin,dealer.admin")]
+        [CacheRemoveAspect("IMemberService.Get")]
         public IResult Delete(int memberId)
         {
             var result = BusinessRules.ValidateEntityExistence(

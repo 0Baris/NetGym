@@ -8,7 +8,7 @@ using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
+using Microsoft.Extensions.Options;
 
 namespace WebAPI
 {
@@ -23,11 +23,7 @@ namespace WebAPI
 
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            // Autofac ile classlar i�inde yapt�k
-            // IProductService isteniyorsa ona ProductManager de�erini ver.
-            // ��erisinde data olmad��� takdirde tutulabilir.
-            //builder.Services.AddSingleton<IProductService,ProductManager>();
-            //builder.Services.AddSingleton<IProductDal, EfProductDal >();
+
 
             var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -57,8 +53,8 @@ namespace WebAPI
             builder.Services.AddSwaggerGen();
 
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory(options =>
-                    options.RegisterModule(new AutofacBusinessModule())
-                ));
+                options.RegisterModule(new AutofacBusinessModule())
+            ));
 
             var app = builder.Build();
 
@@ -76,7 +72,6 @@ namespace WebAPI
             app.UseAuthentication();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
