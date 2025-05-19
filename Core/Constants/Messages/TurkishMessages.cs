@@ -91,6 +91,8 @@ namespace Core.Constants.Messages
         public static string OperationFailed = "İşlem başarısız oldu.";
         public static string InvalidStatus => "Geçerli bir durum değeri olmalıdır (0: Pasif, 1: Aktif)";
 
+        public static string RegionError = "Böyle bir bölge bulunamadı!";
+
         public static string Success = "Başarılı bir şekilde listelendi.";
         
         // Validasyonlar için gereken mesajlar

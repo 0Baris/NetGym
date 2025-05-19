@@ -94,6 +94,17 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
-        
+
+
+        [HttpGet("region/{region}")]
+        public IActionResult GetByRegion(string region)
+        {
+            var result = _dealerService.GetByRegion(region);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

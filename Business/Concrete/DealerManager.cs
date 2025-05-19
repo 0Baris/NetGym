@@ -103,5 +103,17 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+
+        public IDataResult<Dealer> GetByRegion(string region)
+        {
+            var dealer = _dealerDal.GetAll(d =>
+                    d.Region.Replace(" ", "").ToLowerInvariant() == region.Replace(" ", "").ToLowerInvariant())
+                .FirstOrDefault();
+            if (dealer == null)
+            {
+                return new ErrorDataResult<Dealer>(TurkishMessages.RegionError);
+            }
+            return new SuccessDataResult<Dealer>(dealer);
+        }
     }
 }

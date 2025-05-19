@@ -9,6 +9,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Dealer>> GetAll();
         IDataResult<Dealer>  GetById(int dealerId);
+        IDataResult<Dealer>  GetByRegion(string region);
         IResult Add(Dealer dealer);
         IResult Update(Dealer dealer);
         IResult Delete(int dealerId);
