@@ -64,61 +64,8 @@ NetGym/
 
 ## API Endpoints 🔌
 
-### Auth 🔐
-- POST /api/auth/login
-- POST /api/auth/register
+![localhost_44374_swagger_index html](https://github.com/user-attachments/assets/a2f57d0a-3cb5-4017-b521-27e6967d98ba)
 
-### Member 👥
-- GET /api/member/getall
-- GET /api/member/getbyid
-- POST /api/member/add
-- PUT /api/member/update
-- DELETE /api/member/delete
-- GET /api/member/getallwithdetails
-- GET /api/member/getbyidwithdetails
-- GET /api/member/getmembercampaigns
-- GET /api/member/getmembercampaigndetailbymemberid
-
-### Subscription 📝
-- GET /api/subscription/getall
-- GET /api/subscription/getbyid
-- POST /api/subscription/add
-- PUT /api/subscription/update
-- DELETE /api/subscription/delete
-- GET /api/subscription/getallbydetails
-- GET /api/subscription/getdetailsbyid
-
-### Package 📦
-- GET /api/package/getall
-- GET /api/package/getbyid
-- POST /api/package/add
-- PUT /api/package/update
-- DELETE /api/package/delete
-
-### Campaign 🎯
-- GET /api/campaign/getall
-- GET /api/campaign/getbyid
-- POST /api/campaign/add
-- PUT /api/campaign/update
-- DELETE /api/campaign/delete
-
-### Trainer 💪
-- GET /api/trainer/getall
-- GET /api/trainer/getbyid
-- POST /api/trainer/add
-- PUT /api/trainer/update
-- DELETE /api/trainer/delete
-- GET /api/trainer/getallwithdetails
-- GET /api/trainer/getbyidwithdetails
-
-### Dealer 🤝
-- GET /api/dealer/getall
-- GET /api/dealer/getbyid
-- POST /api/dealer/add
-- PUT /api/dealer/update
-- DELETE /api/dealer/delete
-- GET /api/dealer/getallwithdetails
-- GET /api/dealer/getbyidwithdetailsbyid
 
 ## Kurulum 🚀
 
